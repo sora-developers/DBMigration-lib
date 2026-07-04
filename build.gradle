@@ -1,0 +1,41 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.2.21'
+    id 'java-library'
+    id 'org.jetbrains.dokka' version '2.2.0'
+}
+
+group = 'com.rakku212'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api("io.github.classgraph:classgraph:4.8.184")
+    api("com.zaxxer:HikariCP:7.0.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.xerial:sqlite-jdbc:3.49.1.0")
+    testImplementation("com.mysql:mysql-connector-j:9.3.0")
+    testImplementation("org.mariadb.jdbc:mariadb-java-client:3.5.3")
+    testImplementation("org.testcontainers:testcontainers:1.21.4")
+    testImplementation("org.testcontainers:mysql:1.21.4")
+    testImplementation("org.testcontainers:mariadb:1.21.4")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.12.2")
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dokka {
+    dokkaPublications {
+        html {
+            outputDirectory.set(layout.buildDirectory.dir('dokka/html'))
+        }
+    }
+}
